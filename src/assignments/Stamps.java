@@ -5,7 +5,7 @@ public class Stamps {
 	private final int[] valueOfcategoryI = { 2, 5, 10, 15, 20 };
 	private int[] amountOfCatergoryI = new int[5];
 	private int lengthOfAmountOfCat = amountOfCatergoryI.length;
-	
+
 	public Stamps(int catA, int catB, int catC, int catD, int catE) {
 		int catI[] = { catA, catB, catC, catD, catE };
 
@@ -61,38 +61,36 @@ public class Stamps {
 		return this.amountOfCatergoryI[4];
 	}
 
-	
 	public void addStamps(int catA, int catB, int catC, int catD, int catE) {
 		int catI[] = { catA, catB, catC, catD, catE };
-		
-		for(int i = 0; i < lengthOfAmountOfCat; i ++) {
+
+		for (int i = 0; i < lengthOfAmountOfCat; i++) {
 			this.amountOfCatergoryI[i] = catI[i];
 		}
 	}
-	
-	public int StampsTotal() {
+
+	public int getStampsTotal() {
 		int totalPrice = 0;
-		for(int i = 0; i < lengthOfAmountOfCat; i++) {
+		for (int i = 0; i < lengthOfAmountOfCat; i++) {
 			totalPrice += amountOfCatergoryI[i] * valueOfcategoryI[i];
 		}
 		return totalPrice;
 	}
-	
+
 	public String toString() {
 		String stringToReturn = "";
-		for(int i = 0; i < lengthOfAmountOfCat; i++) {
-			stringToReturn += ( amountOfCatergoryI[i] +" x $" + valueOfcategoryI[i] + " + ");
+		for (int i = 0; i < lengthOfAmountOfCat; i++) {
+			stringToReturn += (amountOfCatergoryI[i] + " x $" + valueOfcategoryI[i] + " + ");
 		}
-		
+
 		return stringToReturn;
 	}
-	
+
 	public boolean equals(Stamps otherStamp) {
-		for(int i = 0; i < lengthOfAmountOfCat; i++) {
-			if(this.amountOfCatergoryI[i] != otherStamp.amountOfCatergoryI[i]) {
-				return false;
-			}
+		if (this.toString().equals(otherStamp.toString())) {
+			return true;
+		} else {
+			return true;
 		}
-		return true;
 	}
 }
