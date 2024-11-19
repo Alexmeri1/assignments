@@ -47,13 +47,22 @@ public class Label {
 	public int getExpiryMonth() {
 		return this.expiryMonth;
 	}
+	
+	public void setExpiryDay(int newDay) {
+		this.expiryDay = newDay;
+	}
+	
+	public void setExpiryMonth(int newMonth) {
+		this.expiryMonth = newMonth;
+	}
 
+	 @Override
 	public String toString() {
 		String expiryDayString = "";
 		String expiryMonthString = "";
 		String toString = "";
-		if (this.getExpiryDay() >= 0 && this.getExpiryDay() <= 9) {
-			expiryDayString = "0" + this.expiryDay;
+		if (getExpiryDay() >= 0 && getExpiryDay() <= 9) {
+			expiryDayString = "0" + getExpiryDay();
 		} else {
 			expiryDayString = Integer.toString((this.expiryDay));
 		}
