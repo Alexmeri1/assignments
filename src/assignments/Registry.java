@@ -4,7 +4,7 @@ public class Registry {
 
 	private Stamps stamp;
 	private Label[] label;
-	private int lengthLabel = label.length;
+	private int lengthLabel;
 
 	public Registry() {
 		this.stamp = null;
@@ -13,14 +13,15 @@ public class Registry {
 
 	public Registry(Stamps stamp, Label[] label) {
 		this.stamp = stamp;
-		this.label = lengthLabel > 0 ? label : null;
+		this.label = label.length > 0 ? label : null;
+		this.lengthLabel = (label != null) ? label.length : 0;
 	}
 
 	public boolean isTotalValueStampsEqual(Registry otherRegistry) {
-		if (this.stamp.getStampsTotal() == otherRegistry.stamp.getStampsTotal()) {
-			return true;
-		} else {
+		if (this.stamp.getStampsTotal() != otherRegistry.stamp.getStampsTotal()) {
 			return false;
+		} else {
+			return true;
 		}
 
 	}
@@ -54,6 +55,7 @@ public class Registry {
 		newLable[lengthLabel] = aLabelToAdd;
 
 		this.label = newLable;
+		this.lengthLabel = (label != null) ? label.length : 0;
 	}
 
 	public void removeLableFromRegistery(Label aLableToRemove) {
@@ -63,11 +65,11 @@ public class Registry {
 
 		} else {
 			for (int i = 0; i < lengthLabel; i++) {
-				if (!this.label.equals(aLableToRemove)) {
+				if (!this.label[i].equals(aLableToRemove)) {
 
 					this.label[i] = newLable[i];
 				} else {
-					i = -1;
+					i -= 1;
 				}
 			}
 		}
@@ -77,7 +79,49 @@ public class Registry {
 	}
 
 //	A method which will update the expiry day and month of a label.  
-	public void updateExpiryDayAndMonth(int day, int month) {
+	public void updateExpiryDayAndMonth(int day, int month, Label aLable) {
+		aLable.setExpiryDay(day);
+		aLable.setExpiryMonth(month);
 	}
+
+	public int addStampsToARegistry(int catA, int catB, int catC, int catD, int catE) {
+
+		this.stamp.addStamps(catA, catB, catC, catD, catE);
+
+		return this.stamp.getStampsTotal();
+	}
+
+	public boolean equals(Stamps aStamp, Label[] labels) {
+		if ((this.stamp.getStampsTotal() != aStamp.getStampsTotal()) || (this.lengthLabel != labels.length)) {
+			return false;
+		} else {
+			return true;
+		}
+
+	}
+
+	@Override
+	public String toString() {
+		String toString = "";
+
+		toString += this.stamp.toString() + "\n";
+		
+		if (lengthLabel < 1) {
+			toString += "No prepaid labels\n";
+		} else {
+			for (int i = 0; i < lengthLabel; i++) {
+				toString += this.label[i].toString() + "\n";
+
+			}
+		}
+
+		return toString;
+	}
+
+	
+	public String getStampsFromRegistry() {
+		return this.stamp.toString();
+	}
+	
 	
 }
