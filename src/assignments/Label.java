@@ -73,7 +73,7 @@ public class Label {
 			expiryMonthString = Integer.toString(this.expiryMonth);
 		}
 
-		toString = (this.getType() + " - " + this.getID() + " - " + expiryDayString + "//" + expiryMonthString);
+		toString = (this.getType() + " - " + this.getID() + " - " + expiryDayString + "/" + expiryMonthString);
 		return toString;
 	}
 	
