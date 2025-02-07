@@ -1,4 +1,4 @@
-package assignments;
+package assignment_1;
 
 public class Vehicles {
 
