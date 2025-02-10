@@ -1,22 +1,29 @@
-package assignment_1;
+package client_related_classes;
+
+import vehicules_related_classes.Vehicles;
 
 public class Client {
 
 	protected String name;
+	protected int ID;
+	private static int lastID = 0 ; 
 
 	protected Vehicles[] allCars = null;
 
 	public Client() {
 		
-		this.name = "No name";
+		this("No name");
 	}
 
 	public Client(String name) {
 		this.name = name;
+		this.ID = 1 + lastID++;
+		
 	}
 
 	public Client(Client c) {
 		this(c.name);
+		
 	}
 
 	public void setName(String name) {
@@ -85,9 +92,13 @@ public class Client {
 		
 
 	}
+	
+	public int getClientID() {
+		return this.ID;
+	}
 
 	public String toString() {
-		String toReturn = String.format("%s has:\n", this.name);
+		String toReturn = String.format("Name: %s  ID#%d has:\n", this.name,this.ID);
 
 		if (this.allCars == null) {
 			toReturn += "No cars\n";

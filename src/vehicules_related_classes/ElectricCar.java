@@ -1,4 +1,4 @@
-package assignment_1;
+package vehicules_related_classes;
 
 
 public class ElectricCar extends Car{
@@ -64,12 +64,11 @@ public class ElectricCar extends Car{
 				&& this.model.equals(ec.model) && this.yearOfProduction == ec.yearOfProduction
 				&& this.maxNbPassangers == ec.maxNbPassangers
 				&& (Double.compare(this.maxRange,ec.maxRange) == 0 ) ) ;
-		
 	}
 	
 	public String toString() {
 		
-		String toReturn = super.toString() + String.format("This electric car has a max range of %.2f kilometers\n",this.maxRange);
+		String toReturn = super.toString() + String.format("Max range: %.2f km|",this.maxRange);
 		return toReturn;
 	}
 }

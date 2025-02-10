@@ -1,4 +1,4 @@
-package assignment_1;
+package vehicules_related_classes;
 
 abstract public class Truck extends Vehicles {
 
@@ -47,7 +47,7 @@ abstract public class Truck extends Vehicles {
 	@Override
 	public String toString() {
 
-		String toReturn = super.toString() + String.format("It has a max capacity of %.3f Kgs\n", this.maxCapacity);
+		String toReturn = super.toString() + String.format("Max capacity: %.3f Kgs|", this.maxCapacity);
 
 		return toReturn;
 

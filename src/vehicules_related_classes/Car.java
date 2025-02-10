@@ -1,4 +1,4 @@
-package assignment_1;
+package vehicules_related_classes;
 
 public class Car extends Vehicles {
 
@@ -31,7 +31,7 @@ public class Car extends Vehicles {
 
 	@Override
 	public String toString() {
-		String toReturn = super.toString() + String.format("This car can hold %d passangers\n", this.maxNbPassangers);
+		String toReturn = super.toString() + String.format("%d passangers|", this.maxNbPassangers);
 
 		return toReturn;
 	}

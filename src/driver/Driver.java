@@ -1,4 +1,10 @@
-package assignment_1;
+package driver;
+
+import client_related_classes.Client;
+import vehicules_related_classes.Car;
+import vehicules_related_classes.DieselTruck;
+import vehicules_related_classes.ElectricCar;
+import vehicules_related_classes.ElectricTruck;
 
 public class Driver {
 
@@ -42,13 +48,15 @@ public class Driver {
 		System.out.println(ec2);
 		System.out.println(ec3);
 		
-		
-		Client c = new Client("Alex");
+		System.out.println();
+		Client Alex = new Client("Alex");
+		Client b = new Client("Alex");
 		//System.out.println(c);
 		
-		c.addVehiclesToClient(ec2);
-		c.removeVehiclesFromClient(ec2);
-		System.out.println(c);
+		Alex.addVehiclesToClient(ec2);
+		System.out.println(Alex);
+		
+		Alex.removeVehiclesFromClient(ec2);
 		
 	}
 

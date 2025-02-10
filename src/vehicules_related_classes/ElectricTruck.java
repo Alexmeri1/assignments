@@ -1,4 +1,4 @@
-package assignment_1;
+package vehicules_related_classes;
 
 public class ElectricTruck extends Truck{
 	protected double maxRange;
@@ -37,7 +37,7 @@ public class ElectricTruck extends Truck{
 	}
 	
 	public String toString() {
-		String toReturn = super.toString() + String.format("This electric truck has a max range of %.2f kilometers\n",this.maxRange);
+		String toReturn = super.toString() + String.format("Max range: %.2f km|",this.maxRange);
 		
 		return toReturn;
 	}

@@ -1,4 +1,4 @@
-package assignment_1;
+package vehicules_related_classes;
 
 public abstract class Vehicles {
 
@@ -75,7 +75,7 @@ public abstract class Vehicles {
 		return this.plateNumber;
 	}
 	
-	public String createPlateNb() {
+	public final String createPlateNb() {
 
 		String plateNb = this.getType() + this.getNumberForPlate();
 
@@ -103,11 +103,7 @@ public abstract class Vehicles {
 
 	public String toString() {
 
-		String toReturn = String.format("""
-				This is a: %s
-				The maker of this vehicle is : %s
-				The year of production of this vehicle is: %d
-				The plate number of this vehicle is: %s\n""", this.model, this.make, this.yearOfProduction,
+		String toReturn = String.format("Model: %s|Make: %s|Year of production: %d|Plate number: %s|", this.model, this.make, this.yearOfProduction,
 				this.plateNumber);
 
 		return toReturn;

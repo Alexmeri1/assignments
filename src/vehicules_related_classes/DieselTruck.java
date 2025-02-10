@@ -1,4 +1,4 @@
-package assignment_1;
+package vehicules_related_classes;
 
 public class DieselTruck extends Truck{
 	private static int nbOfVehicles;
@@ -21,7 +21,7 @@ public class DieselTruck extends Truck{
 
 	public String toString() {
 		String toReturn = super.toString() + 
-				String.format("This Diesel truck has a max fuel tank capacity of %.3f liters\n",this.tankCapa);
+				String.format("Max fuel tank capacity: %.3f L|",this.tankCapa);
 		
 		
 		return toReturn;
