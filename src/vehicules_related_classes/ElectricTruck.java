@@ -20,6 +20,14 @@ public class ElectricTruck extends Truck{
 	}
 
 	
+	public double getMaxRange() {
+		return maxRange;
+	}
+
+	public void setMaxRange(double maxRange) {
+		this.maxRange = maxRange;
+	}
+
 	@Override
 	public void incrementNbVehicles() {
 		this.nbOfVehicles++;

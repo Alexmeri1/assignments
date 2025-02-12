@@ -1,7 +1,8 @@
 package vehicules_related_classes;
 
-public abstract class Vehicles {
+import java.util.Scanner;
 
+public abstract class Vehicles {
 	protected String model;
 	protected int yearOfProduction;
 	protected String make;
@@ -72,7 +73,7 @@ public abstract class Vehicles {
 	abstract public String getType();
 
 	public String getPlateNb() {
-		return this.plateNumber;
+		return this.plateNumber; 
 	}
 	
 	public final String createPlateNb() {

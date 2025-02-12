@@ -19,6 +19,14 @@ public class DieselTruck extends Truck{
 		this.tankCapa = otherT.tankCapa;
 	}
 
+	public double getTankCapa() {
+		return tankCapa;
+	}
+
+	public void setTankCapa(double tankCapa) {
+		this.tankCapa = tankCapa;
+	}
+
 	public String toString() {
 		String toReturn = super.toString() + 
 				String.format("Max fuel tank capacity: %.3f L|",this.tankCapa);

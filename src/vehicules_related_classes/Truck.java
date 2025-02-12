@@ -32,6 +32,7 @@ abstract public class Truck extends Vehicles {
 		if (this == otherT) {
 			return true;
 		}
+		
 		if (otherT == null || this.getClass() != otherT.getClass()) {
 			return false;
 		}

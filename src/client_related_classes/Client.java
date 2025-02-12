@@ -6,7 +6,7 @@ public class Client {
 
 	protected String name;
 	protected int ID;
-	private static int lastID = 0 ; 
+	private static int lastID = 0 ;
 
 	protected Vehicles[] allCars = null;
 
@@ -18,14 +18,30 @@ public class Client {
 	public Client(String name) {
 		this.name = name;
 		this.ID = 1 + lastID++;
-		
 	}
-
+	
 	public Client(Client c) {
 		this(c.name);
 		
 	}
+	
+	
+	public boolean equals(Object o) {
+		if(this == o) {
+			return true;
+			
+		}
+		
+		if (this == null || this.getClass() != o.getClass()) {
+			return false;
+		}
+		Client c = (Client) o;
+		
+		return this.ID == c.ID && this.name.equals(c.name);
+		
+	}
 
+	
 	public void setName(String name) {
 		this.name = name;
 	}
