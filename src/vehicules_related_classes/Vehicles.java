@@ -9,7 +9,7 @@ public abstract class Vehicles {
 	protected String plateNumber;
 
 	public Vehicles() {
-		this("No model", 0, "No make");
+		this("Audi", 0, "No make");
 	}
 
 	public Vehicles(String model, int yearOfProduction, String make) {
