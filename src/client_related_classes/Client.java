@@ -3,7 +3,7 @@ package client_related_classes;
 import vehicules_related_classes.Vehicles;
 
 public class Client {
-
+	
 	protected String name;
 	protected int ID;
 	private static int lastID = 0;
@@ -86,7 +86,7 @@ public class Client {
 				}
 			}
 			if (this.allCars.length == 1 && exist == true) {
-				System.out.println("Now you have no cars");
+				System.err.println("Now you have no cars");
 				this.allCars = null;
 			} else if (exist) {
 				newArrayCars = new Vehicles[this.allCars.length + 1];
@@ -99,7 +99,7 @@ public class Client {
 					System.out.println("car removed succesfully ");
 					this.allCars = newArrayCars;
 			} else {
-				System.out.println("The car wasn't found");
+				System.err.println("The car wasn't found");
 				//so do nothing
 			}
 
