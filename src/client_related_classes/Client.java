@@ -6,7 +6,7 @@ public class Client {
 
 	protected String name;
 	protected int ID;
-	private static int lastID = 0 ;
+	private static int lastID = 0;
 
 	protected Vehicles[] allCars = null;
 
@@ -17,7 +17,7 @@ public class Client {
 
 	public Client(String name) {
 		this.name = name;
-		this.ID = 1 + lastID++;
+		this.ID = ++lastID;
 	}
 	
 	public Client(Client c) {
