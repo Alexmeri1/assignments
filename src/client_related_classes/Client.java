@@ -25,6 +25,9 @@ public class Client {
 		
 	}
 	
+	public static void createClient(String name) {
+		new Client(name);
+	}
 	
 	public boolean equals(Object o) {
 		if(this == o) {

@@ -56,7 +56,7 @@ public class Main {
 										5) Back
 									Your choice is ->: """);
 							String choiceV = sc.next();
-							 sc.nextLine();
+							sc.nextLine();
 							switch (choiceV) {
 
 							case "1":
@@ -116,16 +116,31 @@ public class Main {
 
 						break;
 					case "2":
-//						displayDeleteVehicles();
+						System.out.println("Among all the vehicles choose the 1 want you want to delete."
+								+ "\nWrite the plate number off the appropriate car");
+						manager.listAllVehiclesByCat();
+						System.out.print("Your choice ->: ");
+						String plateNbToDelete = sc.next();
+						sc.nextLine();
+						manager.deleteVehicle(plateNbToDelete);
+						
 						break;
 					case "3":
-//						displayEditVehicles();
+						System.out.println("Among all the vehicles choose the 1 want you want to edit."
+								+ "\nWrite the plate number off the appropriate car");
+						manager.listAllVehiclesByCat();
+						System.out.print("Your choice ->: ");
+						String plateNbToEdit = sc.next();
+						sc.nextLine();
+						System.out.println(
+								"Now write all the attributes (new AND old) of the vehicle, separeted by spaces.");
+						String newVehicle = sc.nextLine();
+						manager.editVehicle(plateNbToEdit,newVehicle);
 						break;
 					case "4":
 						manager.listAllVehiclesByCat();
 						break;
 					case "5":
-
 						break;
 					default:
 						System.err.println("Wrong input");
@@ -140,10 +155,14 @@ public class Main {
 					switch (secondChoice) {
 
 					case "1":
-//						displayAddClient();
+						System.out.println("Enter the name of the client:");
+						String name = sc.nextLine();
+						manager.addClient(new Client(name));
+						
+						
 						break;
 					case "2":
-//						displayDeleteClient();
+						
 						break;
 					case "3":
 //						displayEditClient();
