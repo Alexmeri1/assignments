@@ -104,7 +104,7 @@ public abstract class Vehicles {
 
 	public String toString() {
 
-		String toReturn = String.format("Model: %s|Make: %s|Year of production: %d|Plate number: %s|", this.model, this.make, this.yearOfProduction,
+		String toReturn = String.format("Model: %s|Year of production: %d|Make: %s|Plate number: %s|", this.model, this.yearOfProduction, this.make,
 				this.plateNumber);
 
 		return toReturn;

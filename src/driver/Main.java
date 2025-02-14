@@ -2,6 +2,7 @@ package driver;
 
 import java.util.Scanner;
 
+import client_related_classes.LeaseManager;
 import client_related_classes.Client;
 import vehicules_related_classes.Car;
 import vehicules_related_classes.DieselTruck;
@@ -13,7 +14,7 @@ public class Main {
 	public static void main(String[] args) {
 		boolean programEnd = false;
 		Scanner sc = new Scanner(System.in);
-
+		LeaseManager manager = new LeaseManager();
 		System.out.println("Hello and welcome to RoyalRentals");
 		int var = 0;
 		displayIntialChoice();
@@ -31,49 +32,137 @@ public class Main {
 				sc.nextLine();
 				String secondChoice = null;
 				switch (choice) {
-				
+
 				case "1":
 					displayOptionsVehicles();
-					secondChoice= sc.next();
+					secondChoice = sc.next();
 					sc.nextLine();
-					switch(secondChoice){
-					
+					switch (secondChoice) {
+
 					case "1":
-						System.out.println("What type of vehicles d");
-						
-//						displayAddVehicles();
-						
+
+						boolean exitLoop = false;
+
+						do {
+							// displayAddVehicles();
+
+							System.out.println("""
+									What type of vehicles do you want?
+									Select from:
+										1) Gasoline car
+										2) Electric car
+										3) Diesel truck
+										4) Electric truck
+										5) Back
+									Your choice is ->: """);
+							String choiceV = sc.next();
+							sc.nextLine();
+							switch (choiceV) {
+
+							case "1":
+								displayWarning();
+								System.out.println(
+										"Model *space* YearOfProduction *space* Make *space* MaxNumberOfPassanger");
+								String newCar[] = sc.nextLine().split(" ");
+
+								Car gc = new Car(newCar[0], Integer.valueOf(newCar[1]), newCar[2],
+										Integer.valueOf(newCar[3]));
+
+								manager.addVehicleToArray(gc);
+								break;
+							case "2":
+								displayWarning();
+								System.out.println(
+										"Model *space* YearOfProduction *space* Make *space* MaxNumberOfPassanger *space* MaxRange (Km)");
+								String newElectricCar[] = sc.nextLine().split(" ");
+
+								ElectricCar ec = new ElectricCar(newElectricCar[0], Integer.valueOf(newElectricCar[1]),
+										newElectricCar[2], Integer.valueOf(newElectricCar[3]),
+										Double.valueOf(newElectricCar[4]));
+								manager.addVehicleToArray(ec);
+
+								break;
+							case "3":
+								displayWarning();
+								System.out.println(
+										"Model *space* YearOfProduction *space* Make *space* MaxCapacity (Kg) *space* TankCapacity (L)");
+								String newDieselTruck[] = sc.nextLine().split(" ");
+
+								DieselTruck dt = new DieselTruck(newDieselTruck[0], Integer.valueOf(newDieselTruck[1]),
+										newDieselTruck[2], Double.valueOf(newDieselTruck[3]),
+										Double.valueOf(newDieselTruck[4]));
+								manager.addVehicleToArray(dt);
+
+								break;
+							case "4":
+								displayWarning();
+								System.out.println(
+										"Model *space* YearOfProduction *space* Make *space* MaxCapacity (Kg) *space* MaxRange (Km)");
+								String newElectricTruck[] = sc.nextLine().split(" ");
+
+								ElectricTruck et = new ElectricTruck(newElectricTruck[0],
+										Integer.valueOf(newElectricTruck[1]), newElectricTruck[2],
+										Double.valueOf(newElectricTruck[3]), Double.valueOf(newElectricTruck[4]));
+								manager.addVehicleToArray(et);
+								break;
+							case "5":
+								exitLoop = true;
+								break;
+							default:
+								System.err.println("Wrong input");
+								break;
+							}
+						} while (!exitLoop);
+
 						break;
 					case "2":
-//						displayDeleteVehicles();
+						System.out.println("Among all the vehicles choose the 1 want you want to delete."
+								+ "\nWrite the plate number off the appropriate car");
+						manager.listAllVehiclesByCat();
+						System.out.print("Your choice ->: ");
+						String plateNbToDelete = sc.next();
+						sc.nextLine();
+						manager.deleteVehicle(plateNbToDelete);
+						
 						break;
 					case "3":
-//						displayEditVehicles();
+						System.out.println("Among all the vehicles choose the 1 want you want to edit."
+								+ "\nWrite the plate number off the appropriate car");
+						manager.listAllVehiclesByCat();
+						System.out.print("Your choice ->: ");
+						String plateNbToEdit = sc.next();
+						sc.nextLine();
+						System.out.println(
+								"Now write all the attributes (new AND old) of the vehicle, separeted by spaces.");
+						String newVehicle = sc.nextLine();
+						manager.editVehicle(plateNbToEdit,newVehicle);
 						break;
 					case "4":
-//						displayListAllVehicles();
+						manager.listAllVehiclesByCat();
 						break;
 					case "5":
-						
 						break;
 					default:
 						System.err.println("Wrong input");
 						break;
 					}
-					
-					
+
 					break;
 				case "2":
 					displayOptionsClient();
-					secondChoice= sc.next();
+					secondChoice = sc.next();
 					sc.nextLine();
-					switch(secondChoice){
-					
+					switch (secondChoice) {
+
 					case "1":
-//						displayAddClient();
+						System.out.println("Enter the name of the client:");
+						String name = sc.nextLine();
+						manager.addClient(new Client(name));
+						
+						
 						break;
 					case "2":
-//						displayDeleteClient();
+						
 						break;
 					case "3":
 //						displayEditClient();
@@ -88,14 +177,14 @@ public class Main {
 					break;
 				case "3":
 					displayOptionsLease();
-					secondChoice= sc.next();
+					secondChoice = sc.next();
 					sc.nextLine();
-					switch(secondChoice){
-					
+					switch (secondChoice) {
+
 					case "1":
 //						displayLeaseToClient();
 						break;
-						
+
 					case "2":
 //						displayReturnVToClient();
 						break;
@@ -106,41 +195,38 @@ public class Main {
 //						displayAllLeasedVehicles();
 						break;
 					case "5":
-						
+
 						break;
 					default:
 						System.err.println("Wrong input");
 						break;
-					};
+					}
+					;
 					break;
 				case "4":
 					displayOptionsAdditional();
-					secondChoice= sc.next();
+					secondChoice = sc.next();
 					sc.nextLine();
-					switch(secondChoice){
-					
+					switch (secondChoice) {
+
 					case "1":
 //						displayTruckWithLargestCap();
 						break;
 					case "2":
 //						displayCopyElectricTruck();
 						break;
-						
+
 					default:
-						
+
 						break;
 					}
-					
+
 					break;
-					
-					
-					
-					
+
 				case "5":
 					programEnd = true;
 					break;
-					
-					
+
 				default:
 					System.err.println("Wrong input");
 					break;
@@ -185,10 +271,25 @@ public class Main {
 					5) Back
 				Your choice is ->: """);
 	}
-	
-//	public static void displayAddVehicles() {
-//		
-//	}
+
+	public static void displayAddVehicles() {
+		System.out.println("""
+				What type of vehicles do you want?
+				Select from:
+					"GC": Gasoline car
+					"EC": Electric car
+					"DT":Diesel	truck
+					"ET": Eletric truck
+				Your choice is ->: """);
+	}
+
+	public static void displayWarning() {
+		System.out.println("""
+				Don't make an error here!
+				Enter all your choices in 1 line, each choice followed by a space.
+				""");
+	}
+
 //	
 //	public static void displayDeleteVehicles() {
 //		
@@ -201,7 +302,7 @@ public class Main {
 //	public static void displayListAllVehicles(){
 //		
 //	}
-	
+
 	public static void displayOptionsClient() {
 		System.out.print("""
 				\nSelect from:
@@ -223,9 +324,7 @@ public class Main {
 //	public static void displayEditClient() {
 //		
 //	}
-	
-	
-	
+
 	public static void displayOptionsLease() {
 		System.out.print("""
 				\nSelect from:
@@ -251,7 +350,6 @@ public class Main {
 //	public static void displayAllLeasedVehicles(){
 //		
 //	}
-			
 
 	public static void displayOptionsAdditional() {
 		System.out.print("""
@@ -261,7 +359,7 @@ public class Main {
 					3) Back
 				Your choice is ->: """);
 	}
-	
+
 //	public static void displayTruckWithLargestCap(){
 //		
 //	}
@@ -277,7 +375,7 @@ public class Main {
 		Car c3 = new Car(c2);
 		Car c4 = new Car(c3);
 		System.out.println(c1.getModel());
-		
+
 		System.out.println(c1);
 		System.out.println(c2);
 		System.out.println(c3);
