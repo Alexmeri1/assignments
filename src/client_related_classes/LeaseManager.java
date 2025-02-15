@@ -27,7 +27,7 @@ public class LeaseManager {
 			for (int i = 0; i < allClients.length; i++) {
 				newList[i] = allClients[i];
 			}
-			newList[allClients.length] = c;
+			newList[allClients.length - 1] = c;
 			allClients = newList;
 
 		}
@@ -114,7 +114,7 @@ public class LeaseManager {
 				for (int i = 0; i < arr.length; i++) {
 					newArrCar[i] = (Car) arr[i];
 				}
-				newArrCar[newArrCar.length] = (Car) v;
+				newArrCar[newArrCar.length - 1] = (Car) v;
 
 			}
 			allGasolineCars = newArrCar;
@@ -129,7 +129,7 @@ public class LeaseManager {
 				for (int i = 0; i < arr.length; i++) {
 					newArrECar[i] = (ElectricCar) arr[i];
 				}
-				newArrECar[newArrECar.length] = (ElectricCar) v;
+				newArrECar[newArrECar.length - 1] = (ElectricCar) v;
 
 			}
 			allElectricCars = newArrECar;
@@ -144,7 +144,7 @@ public class LeaseManager {
 				for (int i = 0; i < arr.length; i++) {
 					newArrDieselT[i] = (DieselTruck) arr[i];
 				}
-				newArrDieselT[newArrDieselT.length] = (DieselTruck) v;
+				newArrDieselT[newArrDieselT.length - 1] = (DieselTruck) v;
 
 			}
 			allDieselTrucks = newArrDieselT;
@@ -160,7 +160,7 @@ public class LeaseManager {
 				for (int i = 0; i < arr.length; i++) {
 					newArrET[i] = (ElectricTruck) arr[i];
 				}
-				newArrET[newArrET.length] = (ElectricTruck) v;
+				newArrET[newArrET.length - 1] = (ElectricTruck) v;
 
 			}
 			allElectricTrucks = newArrET;
@@ -309,7 +309,8 @@ public class LeaseManager {
 	}
 
 	public void listAllVehiclesByCat() {
-		if (allGasolineCars == null) {
+
+		if (allGasolineCars == null|| allGasolineCars.length == 0) {
 			System.err.println("No Gasoline Cars");
 		} else {
 			System.out.println("Gasoline Cars:");
@@ -317,38 +318,42 @@ public class LeaseManager {
 
 				System.out.println("#" + i + " " + allGasolineCars[i]);
 			}
-			System.out.println();
+
 		}
-		if (allElectricCars == null) {
-			System.err.println("No Electric Cars");
+		System.out.println();
+		if (allElectricCars == null || allElectricCars.length == 0) {
+			System.out.println("No Electric Cars");
 		} else {
 			System.out.println("Electric Cars:");
 			for (int i = 0; i < allElectricCars.length; i++) {
 
 				System.out.println("#" + i + " " + allElectricCars[i]);
 			}
-			System.out.println();
+
 		}
-		if (allDieselTrucks == null) {
-			System.err.println("No Diesel Trucks");
+		System.out.println();
+		if (allDieselTrucks == null|| allDieselTrucks.length == 0) {
+			System.out.println("No Diesel Trucks");
 		} else {
 			System.err.println("Diesel Trucks:");
 			for (int i = 0; i < allDieselTrucks.length; i++) {
 
 				System.out.println("#" + i + " " + allDieselTrucks[i]);
 			}
-			System.out.println();
+
 		}
-		if (allElectricTrucks == null) {
-			System.err.println("No Electric Trucks");
+		System.out.println();
+		if (allElectricTrucks == null|| allElectricTrucks.length == 0) {
+			System.out.println("No Electric Trucks");
 		} else {
 			System.out.println("Electric Trucks:");
 			for (int i = 0; i < allElectricTrucks.length; i++) {
 
 				System.out.println("#" + i + " " + allElectricTrucks[i]);
 			}
-			System.out.println();
+
 		}
+		System.out.println();
 	}
 
 	public void editVehicle(String plateNbToEdit, String newV) {
