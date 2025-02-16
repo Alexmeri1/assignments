@@ -2,20 +2,20 @@ package client_related_classes;
 
 import java.security.AllPermission;
 
-import vehicules_related_classes.Vehicles;
+import vehicules_related_classes.Vehicle;
 
 public class LeasingOperations extends Client {
 
-	protected Vehicles[] leasedCars;
+	protected Vehicle[] leasedCars;
 
-	protected Vehicles[] clientsCars;
-
-	
-
-	protected Vehicles[] allCars = null;
+	protected Vehicle[] clientsCars;
 
 	
-	public void leaseVehicles(Vehicles v, Client c) {
+
+	protected Vehicle[] allCars = null;
+
+	
+	public void leaseVehicles(Vehicle v, Client c) {
 			
 		
 	}

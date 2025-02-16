@@ -1,18 +1,16 @@
 package vehicules_related_classes;
 
-import java.util.Scanner;
-
-public abstract class Vehicles {
+public abstract class Vehicle {
 	protected String model;
 	protected int yearOfProduction;
 	protected String make;
 	protected String plateNumber;
 
-	public Vehicles() {
+	public Vehicle() {
 		this("Audi", 0, "No make");
 	}
 
-	public Vehicles(String model, int yearOfProduction, String make) {
+	public Vehicle(String model, int yearOfProduction, String make) {
 		this.model = model;
 		this.yearOfProduction = yearOfProduction;
 		this.make = make;
@@ -24,11 +22,10 @@ public abstract class Vehicles {
 
 	abstract public int getNbVehicles();
 
-	public Vehicles(Vehicles otherV) {
+	public Vehicle(Vehicle otherV) {
 		this(otherV.model, otherV.yearOfProduction, otherV.make);
 	}
 
-	
 	public void setModel(String model) {
 		this.model = model;
 	}
@@ -64,7 +61,7 @@ public abstract class Vehicles {
 
 		}
 
-		Vehicles v = (Vehicles) otherObj;
+		Vehicle v = (Vehicle) otherObj;
 
 		return (this.make.equals(v.make) && this.model.equals(v.model) && this.yearOfProduction == v.yearOfProduction);
 
@@ -73,9 +70,9 @@ public abstract class Vehicles {
 	abstract public String getType();
 
 	public String getPlateNb() {
-		return this.plateNumber; 
+		return this.plateNumber;
 	}
-	
+
 	public final String createPlateNb() {
 
 		String plateNb = this.getType() + this.getNumberForPlate();
@@ -85,16 +82,16 @@ public abstract class Vehicles {
 
 	private String getNumberForPlate() {
 		String number = "1";
-		
+
 		int orginalNb = this.getNbVehicles();
-			
+
 		if (orginalNb < 10) {
 			number += "00" + orginalNb;
-		}else if(orginalNb < 100) {
+		} else if (orginalNb < 100) {
 			number += "0" + orginalNb;
-		}else if (orginalNb < 1000) {
+		} else if (orginalNb < 1000) {
 			number += String.valueOf(orginalNb);
-		}else {
+		} else {
 			number += "xxxx";
 		}
 
@@ -104,8 +101,8 @@ public abstract class Vehicles {
 
 	public String toString() {
 
-		String toReturn = String.format("Model: %s|Year of production: %d|Make: %s|Plate number: %s|", this.model, this.yearOfProduction, this.make,
-				this.plateNumber);
+		String toReturn = String.format("Model: %s|Year of production: %d|Make: %s|Plate number: %s|", this.model,
+				this.yearOfProduction, this.make, this.plateNumber);
 
 		return toReturn;
 	}

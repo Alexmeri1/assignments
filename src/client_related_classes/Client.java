@@ -1,6 +1,6 @@
 package client_related_classes;
 
-import vehicules_related_classes.Vehicles;
+import vehicules_related_classes.Vehicle;
 
 public class Client {
 	
@@ -8,7 +8,7 @@ public class Client {
 	protected int ID;
 	private static int lastID = 0;
 
-	protected Vehicles[] allCars = null;
+	protected Vehicle[] allCars = null;
 
 	public Client() {
 		
@@ -53,13 +53,13 @@ public class Client {
 		return this.name;
 	}
 
-	public void addVehiclesToClient(Vehicles v) {
-		Vehicles[] arrayAdded;
+	public void addVehiclesToClient(Vehicle v) {
+		Vehicle[] arrayAdded;
 
 		if (this.allCars == null) {
-			arrayAdded = new Vehicles[1];
+			arrayAdded = new Vehicle[1];
 		} else {
-			arrayAdded = new Vehicles[this.allCars.length + 1];
+			arrayAdded = new Vehicle[this.allCars.length + 1];
 			for (int i = 0; i < this.allCars.length; i++) {
 				arrayAdded[i] = this.allCars[i];
 
@@ -72,15 +72,15 @@ public class Client {
 
 	}
 
-	public void removeVehiclesFromClient(Vehicles v) {
+	public void removeVehiclesFromClient(Vehicle v) {
 
-		Vehicles[] newArrayCars = null;
+		Vehicle[] newArrayCars = null;
 		
 		if (this.allCars == null) {
 			System.out.println("No cars to remove");
 		} else {
 			boolean exist = false;
-			for (Vehicles car : this.allCars) {
+			for (Vehicle car : this.allCars) {
 				
 				//Here we also want the plate numbers to match
 				if (car.equals(v) && car.getPlateNb().equals(v.getPlateNb())) {
@@ -92,7 +92,7 @@ public class Client {
 				System.err.println("Now you have no cars");
 				this.allCars = null;
 			} else if (exist) {
-				newArrayCars = new Vehicles[this.allCars.length + 1];
+				newArrayCars = new Vehicle[this.allCars.length + 1];
 				for (int i = 0, j = 0; i < this.allCars.length; i++) {
 					if (!this.allCars[i].equals(v)) {
 						newArrayCars[i] = this.allCars[i];

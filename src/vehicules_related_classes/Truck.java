@@ -1,6 +1,6 @@
 package vehicules_related_classes;
 
-abstract public class Truck extends Vehicles {
+abstract public class Truck extends Vehicle {
 
 	protected double maxCapacity;
 	

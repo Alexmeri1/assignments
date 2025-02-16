@@ -1,6 +1,6 @@
 package vehicules_related_classes;
 
-public class Car extends Vehicles {
+public class Car extends Vehicle {
 
 	protected int maxNbPassangers;
 	private static int nbOfVehicles;

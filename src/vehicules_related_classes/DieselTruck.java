@@ -2,34 +2,34 @@ package vehicules_related_classes;
 
 public class DieselTruck extends Truck{
 	private static int nbOfVehicles;
-	protected double tankCapa;
+	protected double tankCapacity;
 	
 	public DieselTruck() {
 		super();
-		this.tankCapa = 0;
+		this.tankCapacity = 0;
 	}
 
 	public DieselTruck(String model, int yearOfProduction, String make, double maxCapacity,double tankCapa) {
 		super(model, yearOfProduction, make, maxCapacity);
-		this.tankCapa = tankCapa;
+		this.tankCapacity = tankCapa;
 	}
 
 	public DieselTruck(DieselTruck otherT) {
 		super(otherT);
-		this.tankCapa = otherT.tankCapa;
+		this.tankCapacity = otherT.tankCapacity;
 	}
 
 	public double getTankCapa() {
-		return tankCapa;
+		return tankCapacity;
 	}
 
 	public void setTankCapa(double tankCapa) {
-		this.tankCapa = tankCapa;
+		this.tankCapacity = tankCapa;
 	}
 
 	public String toString() {
 		String toReturn = super.toString() + 
-				String.format("Max fuel tank capacity: %.3f L|",this.tankCapa);
+				String.format("Max fuel tank capacity: %.3f L|",this.tankCapacity);
 		
 		
 		return toReturn;
