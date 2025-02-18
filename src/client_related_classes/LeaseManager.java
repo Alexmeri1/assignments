@@ -18,15 +18,21 @@ public class LeaseManager {
 
 	protected Client allClients[] = null;
 
+	protected Vehicle[] allLeasedVehicles = null;
+
 	public void addClient(Client c) {
+
 		if (allClients == null) {
 			allClients = new Client[1];
 			allClients[0] = c;
+
 		} else {
+
 			Client[] newList = new Client[allClients.length + 1];
 			for (int i = 0; i < allClients.length; i++) {
 				newList[i] = allClients[i];
 			}
+
 			newList[allClients.length - 1] = c;
 			allClients = newList;
 
@@ -34,43 +40,195 @@ public class LeaseManager {
 
 	}
 
-	public void deleteClient(Client c) {
-		if (allClients == null) {
-			System.err.println("No clients to remove");
-		} else if (allClients.length == 1) {
-			allClients = null;
-		} else if (isClientInArray(c)) {
-			System.out.println("Client not in the array");
-		} else {
-			Client[] newList = new Client[allClients.length - 1];
-			for (int i = 0, j = 0; i < allClients.length; i++) {
-				if (!allClients[i].equals(c)) {
-					newList[j] = allClients[i];
-					j++;
-				}
+	public void listAllClients() {
 
+		if (allClients == null || allClients.length == 0) {
+			System.out.println("No clients yet");
+			return;
+		} else {
+
+			for (int i = 0; i < allClients.length; i++) {
+				System.out.printf("Client name: %s| ID: %s", allClients[i].getClientID(), allClients[i].getName());
 			}
-			allClients = newList;
+
 		}
 
 	}
 
-	private boolean isClientInArray(Client c) {
-		if (allClients == null) {
+	private Client ClientInArray(int id) {
 
-			System.out.println("Array empty");
-			return false;
-
+		if (allClients == null || allClients.length == 0) {
+			return null;
 		} else {
-
 			for (int i = 0; i < allClients.length; i++) {
-
-				if (allClients[i].equals(c)) {
-					return true;
+				if (allClients[i].getClientID() == id) {
+					return allClients[i];
 				}
 			}
 		}
+		return null;
+
+	}
+
+	public void editClientName(int id, String name) {
+
+		if (allClients == null || allClients.length == 0) {
+			System.out.println("No clients to remove");
+		} else if (allClients.length == 1) {
+			if (allClients[0].getClientID() == id) {
+				allClients[0].setName(name);
+			} else {
+				System.out.println("Client not found");
+			}
+
+		} else {
+			for (int i = 0; i < allClients.length; i++) {
+				if (allClients[i].getClientID() == id) {
+					allClients[i].setName(name);
+					System.out.println("Name set");
+					return;
+				}
+			}
+			System.out.println("Client was not found");
+		}
+
+	}
+
+	private boolean isVehicleLeased(String plate) {
+		if (allLeasedVehicles == null || allLeasedVehicles.length == 0) {
+			return false;
+		} else {
+			for (int i = 0; i < allLeasedVehicles.length; i++) {
+				if (allLeasedVehicles[i].getPlateNb().equals(plate)) {
+					return true;
+				}
+			}
+
+		}
+
 		return false;
+	}
+	
+	private void addVehicleToLeasedArray(Vehicle v) {
+		
+		if(allLeasedVehicles == null|| allLeasedVehicles.length == 0) {
+			allLeasedVehicles = new Vehicle[1]; 
+			allLeasedVehicles[0] = v;
+			return;
+		}else {
+			Vehicle[] newArr = new Vehicle[allLeasedVehicles.length +1]; 
+			for(int i = 0; i < allLeasedVehicles.length; i++) {
+				newArr[i] = allLeasedVehicles[i];
+			}
+			
+			newArr[newArr.length - 1] = v;
+			allLeasedVehicles = newArr;
+		}
+		
+		
+	}
+	
+	public void leaseVehicle(int id, String plate) {
+		Client c = ClientInArray(id);
+		if (c == null) {
+			System.out.println("Client not in array");
+			return;
+		}
+
+		if (isVehicleLeased(plate)) {
+			System.out.println("Vehicle is leased");
+			return;
+		}
+		
+		
+		
+		String type = plate.substring(0, 2);
+		switch (type) {
+
+		case "GC":
+			Vehicle car = getVehicleFromArray(allCars, plate);
+			if (car == null) {
+				addVehicleToLeasedArray(car);
+				c.addVehiclesToClient(car);
+			} else {
+				System.out.println("Car not found");
+			}
+			break;
+		case "EC":
+			Vehicle eCar = getVehicleFromArray(allElectricCars, plate);
+			if (eCar == null) {
+				addVehicleToLeasedArray(eCar);
+				c.addVehiclesToClient(eCar);
+			} else {
+				System.out.println("Car not found");
+			}
+			break;
+		case "DT":
+
+			Vehicle truck = getVehicleFromArray(allDieselTrucks, plate);
+			if (truck == null) {
+				addVehicleToLeasedArray(truck);
+				c.addVehiclesToClient(truck);
+			} else {
+				System.out.println("Car not found");
+			}
+			break;
+		case "ET":
+			Vehicle eTruck = getVehicleFromArray(allElectricTrucks, plate);
+			if (eTruck == null) {
+				addVehicleToLeasedArray(eTruck);
+				c.addVehiclesToClient(eTruck);
+			} else {
+				System.out.println("Car not found");
+			}
+			break;
+
+		default:
+			break;
+
+		}
+
+	}
+
+	public void deleteClient(int clientID) {
+
+		if (allClients == null || allClients.length == 0) {
+
+			System.err.println("No clients to remove");
+
+		} else if (allClients.length == 1) {
+
+			if (allClients[0].getClientID() == clientID) {
+
+				allClients = null;
+				return;
+
+			}
+			System.out.println("Client not found");
+
+		} else {
+
+			Client[] newList = new Client[allClients.length - 1];
+			int i, j;
+
+			for (i = 0, j = 0; i < allClients.length; i++) {
+
+				if (!(allClients[i].getClientID() == clientID)) {
+
+					newList[j] = allClients[i];
+
+					j++;
+				}
+
+			}
+			if (i == j) {
+				System.out.println("Car not found");
+			} else {
+				allClients = newList;
+			}
+
+		}
+
 	}
 
 	public void addVehicle(Vehicle v) {
@@ -89,14 +247,14 @@ public class LeaseManager {
 			allElectricTrucks = addCarToArray(allElectricTrucks, v);
 			break;
 		default:
-			System.err.println("Something wrong accured in addVehicleToArray");
+			System.err.println("Something wrong accured in addVehicle");
 			break;
 		}
 
 	}
 
 	private static Vehicle[] addCarToArray(Vehicle[] arr, Vehicle v) {
-		
+
 		Vehicle[] newArrCar = null;
 		if (arr == null) {
 			newArrCar = new Vehicle[1];

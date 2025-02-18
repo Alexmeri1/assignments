@@ -393,10 +393,6 @@ public class RoyalRentalsApplication {
 
 	private void processOptionsLease() {
 		
-		
-
-
-		
 		boolean runs = true;
 		String choice;
 		do {
@@ -405,8 +401,12 @@ public class RoyalRentalsApplication {
 
 			switch (choice) {
 			case "1": {
-
-
+				System.out.println("Write the ID of the client, semi colon (;), plate number of the vehicles\n");
+				manager.listAllVehiclesByCat();
+				manager.listAllClients();
+				String[] idAndPlate = (getUserInput().trim()).split(";");
+				manager.leaseVehicle(Integer.valueOf(idAndPlate[0]), idAndPlate[1]);
+				
 				break;
 			}
 			case "2": {
@@ -433,9 +433,6 @@ public class RoyalRentalsApplication {
 
 	private void processOptionsClient() {
 		
-		
-
-		
 		boolean runs = true;
 		String choice;
 		do {
@@ -446,22 +443,27 @@ public class RoyalRentalsApplication {
 			case "1": {
 
 				System.out.println("Enter the name of the client:");
-				String name = sc.nextLine();
+				String name = getUserInput();
 				manager.addClient(new Client(name));
 
 				break;
 			}
 			case "2": {
-
+				System.out.println("Enter the ID of the client, among the bellow");
+				manager.listAllClients();
+				int id = Integer.valueOf(getUserInput().trim());
+				manager.deleteClient(id);
+				
 				break;
 			}
 			case "3": {
+				
+				System.out.println("Enter enter the id ,semi-colon (;), new client name ");
+				String[] name = getUserInput().split(";");
+				
 				break;
 			}
 			case "4": {
-				break;
-			}
-			case "5": {
 				runs = false;
 				break;
 			}

@@ -8,7 +8,7 @@ public class Client {
 	protected int ID;
 	private static int lastID = 0;
 
-	protected Vehicle[] allCars = null;
+	protected Vehicle[] allCarsLeased = null;
 
 	public Client() {
 		
@@ -23,10 +23,6 @@ public class Client {
 	public Client(Client c) {
 		this(c.name);
 		
-	}
-	
-	public static void createClient(String name) {
-		new Client(name);
 	}
 	
 	public boolean equals(Object o) {
@@ -53,34 +49,49 @@ public class Client {
 		return this.name;
 	}
 
+	public void listAllVehiclesLeasedByClient() {
+		
+		if(allCarsLeased == null || allCarsLeased.length == 0) {
+			System.out.printf("No cars leased by %s \n", this.name);
+		}else {
+			System.out.printf("%s has %d vehicles leased:\n",this.name, this.allCarsLeased.length + 1);
+			for(int i = 0; i < allCarsLeased.length;i++) {
+				System.out.println(allCarsLeased[i]);
+			}
+		}
+		
+	}
+	
 	public void addVehiclesToClient(Vehicle v) {
+		
 		Vehicle[] arrayAdded;
 
-		if (this.allCars == null) {
+		if (this.allCarsLeased == null) {
 			arrayAdded = new Vehicle[1];
 		} else {
-			arrayAdded = new Vehicle[this.allCars.length + 1];
-			for (int i = 0; i < this.allCars.length; i++) {
-				arrayAdded[i] = this.allCars[i];
+			arrayAdded = new Vehicle[this.allCarsLeased.length + 1];
+			for (int i = 0; i < this.allCarsLeased.length; i++) {
+				arrayAdded[i] = this.allCarsLeased[i];
 
 			}
 		}
 
 		arrayAdded[arrayAdded.length - 1] = v;
 
-		this.allCars = arrayAdded;
+		this.allCarsLeased = arrayAdded;
 
 	}
 
+	
 	public void removeVehiclesFromClient(Vehicle v) {
 
 		Vehicle[] newArrayCars = null;
 		
-		if (this.allCars == null) {
+		if (this.allCarsLeased == null) {
 			System.out.println("No cars to remove");
 		} else {
 			boolean exist = false;
-			for (Vehicle car : this.allCars) {
+			for (Vehicle car : this.allCarsLeased) {
 				
 				//Here we also want the plate numbers to match
 				if (car.equals(v) && car.getPlateNb().equals(v.getPlateNb())) {
@@ -88,19 +99,22 @@ public class Client {
 					break;
 				}
 			}
-			if (this.allCars.length == 1 && exist == true) {
+			
+			
+			if (this.allCarsLeased.length == 1 && exist == true) {
 				System.err.println("Now you have no cars");
-				this.allCars = null;
+				this.allCarsLeased = null;
+				
 			} else if (exist) {
-				newArrayCars = new Vehicle[this.allCars.length + 1];
-				for (int i = 0, j = 0; i < this.allCars.length; i++) {
-					if (!this.allCars[i].equals(v)) {
-						newArrayCars[i] = this.allCars[i];
+				newArrayCars = new Vehicle[this.allCarsLeased.length + 1];
+				for (int i = 0, j = 0; i < this.allCarsLeased.length; i++) {
+					if (!this.allCarsLeased[i].equals(v)) {
+						newArrayCars[i] = this.allCarsLeased[i];
 						j++;
 					}
 				}
 					System.out.println("car removed succesfully ");
-					this.allCars = newArrayCars;
+					this.allCarsLeased = newArrayCars;
 			} else {
 				System.err.println("The car wasn't found");
 				//so do nothing
@@ -116,15 +130,16 @@ public class Client {
 		return this.ID;
 	}
 
+	
 	public String toString() {
 		String toReturn = String.format("Name: %s  ID#%d has:\n", this.name,this.ID);
 
-		if (this.allCars == null) {
+		if (this.allCarsLeased == null) {
 			toReturn += "No cars\n";
 		} else {
-			toReturn += String.format("%d cars\n\n", this.allCars.length);
-			for (int i = 0; i < this.allCars.length ; i++) {
-				toReturn += this.allCars[i].toString() +"\n";
+			toReturn += String.format("%d cars\n\n", this.allCarsLeased.length);
+			for (int i = 0; i < this.allCarsLeased.length ; i++) {
+				toReturn += this.allCarsLeased[i].toString() +"\n";
 			}
 		}
 		return toReturn;
