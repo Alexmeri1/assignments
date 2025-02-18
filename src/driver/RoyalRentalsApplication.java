@@ -373,14 +373,9 @@ public class RoyalRentalsApplication {
 				break;
 			}
 			case "3": {
-				break;
-			}
-			case "4": {
-				break;
-			}
-			case "5": {
 				runs = false;
 				break;
+				
 			}
 
 			default:
@@ -392,10 +387,6 @@ public class RoyalRentalsApplication {
 	}
 
 	private void processOptionsLease() {
-		
-		
-
-
 		
 		boolean runs = true;
 		String choice;
@@ -433,8 +424,6 @@ public class RoyalRentalsApplication {
 
 	private void processOptionsClient() {
 		
-		
-
 		
 		boolean runs = true;
 		String choice;
