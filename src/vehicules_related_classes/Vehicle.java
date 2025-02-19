@@ -1,15 +1,18 @@
 package vehicules_related_classes;
-
+// Assignment 1
+// Written by: Alexander Meriakri #40310155
 public abstract class Vehicle {
 	protected String model;
 	protected int yearOfProduction;
 	protected String make;
 	protected String plateNumber;
 
+	// Default constructor: initializes the vehicle with default values.
 	public Vehicle() {
 		this("No model", 0, "No make");
 	}
 
+	// Parameterized constructor: initializes the vehicle with specific values and generates a unique plate number.
 	public Vehicle(String model, int yearOfProduction, String make) {
 		this.model = model;
 		this.yearOfProduction = yearOfProduction;
@@ -18,8 +21,10 @@ public abstract class Vehicle {
 		this.plateNumber = createPlateNb();
 	}
 
+	// Abstract method to increment the vehicle count for its specific type.
 	abstract public void incrementNbVehicles();
 
+	// Abstract method to retrieve the total count of vehicles for this type.
 	abstract public int getNbVehicles();
 
 	public Vehicle(Vehicle otherV) {
@@ -51,6 +56,7 @@ public abstract class Vehicle {
 		return this.yearOfProduction;
 	}
 
+	// Checks if this vehicle is equal to another based on make, model, and year of production.
 	@Override
 	public boolean equals(Object otherObj) {
 		if (otherObj == this) {
@@ -73,6 +79,7 @@ public abstract class Vehicle {
 		return this.plateNumber;
 	}
 
+	// Generates a plate number by combining the vehicle type identifier and a formatted unique number.
 	public final String createPlateNb() {
 
 		String plateNb = this.getType() + this.getNumberForPlate();
@@ -80,6 +87,7 @@ public abstract class Vehicle {
 		return plateNb;
 	}
 
+	// Formats the vehicle number into a four-character string. If the count exceeds a limit, the number is replaced with "xxxx".
 	private String getNumberForPlate() {
 		String number = "1";
 
@@ -99,6 +107,7 @@ public abstract class Vehicle {
 
 	}
 
+	// Returns a formatted string representation of the vehicle's attributes.
 	public String toString() {
 
 		String toReturn = String.format(

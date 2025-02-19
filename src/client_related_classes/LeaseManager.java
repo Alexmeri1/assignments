@@ -5,21 +5,29 @@ import vehicules_related_classes.DieselTruck;
 import vehicules_related_classes.ElectricCar;
 import vehicules_related_classes.ElectricTruck;
 import vehicules_related_classes.Vehicle;
-
+// Assignment 1
+// Written by: Alexander Meriakri #40310155
 public class LeaseManager {
 
+	// Array to hold all gasoline cars available
 	protected Vehicle[] allCars = null;
 
+	// Array to hold all electric cars available
 	protected Vehicle[] allElectricCars = null;
 
+	// Array to hold all diesel trucks available
 	protected Vehicle[] allDieselTrucks = null;
 
+	// Array to hold all electric trucks available
 	protected Vehicle[] allElectricTrucks = null;
 
+	// Array to hold all clients registered
 	protected Client[] allClients = null;
 
+	// Array to hold all vehicles currently leased by clients.
 	protected Vehicle[] allLeasedVehicles = null;
 
+	// Adds a new client to the list of clients.
 	public void addClient(Client c) {
 
 		if (allClients == null) {
@@ -40,6 +48,7 @@ public class LeaseManager {
 
 	}
 
+	// Displays a list of all vehicles that are currently leased or indicates if no vehicles are leased.
 	public void listAllLeasedVehicles() {
 		if(allLeasedVehicles == null || allLeasedVehicles.length == 0) {
 			System.out.println("No vehicles leased");
@@ -53,6 +62,7 @@ public class LeaseManager {
 		System.out.println();
 	}
 
+	// Shows all vehicles leased by the client with the specified ID or displays an error if the client is not found.
 	public void listAllVehiclesForClient(int id) {
 		Client c = ClientInArray(id);
 		if(c == null) {
@@ -63,6 +73,7 @@ public class LeaseManager {
 	}
 
 
+	// Displays all registered clients and their information or indicates if no clients are available.
 	public void listAllClients() {
 
 		if (allClients == null || allClients.length == 0) {
@@ -78,6 +89,7 @@ public class LeaseManager {
 
 	}
 
+	// Searches for and returns the client with the specified ID from the client array, or null if not found.
 	private Client ClientInArray(int id) {
 
 		if (allClients == null || allClients.length == 0) {
@@ -93,6 +105,7 @@ public class LeaseManager {
 
 	}
 
+	// Updates the name of a client with the specified ID if the client exists, otherwise displays an error.
 	public void editClientName(int id, String name) {
 
 		if (allClients == null || allClients.length == 0) {
@@ -117,6 +130,7 @@ public class LeaseManager {
 
 	}
 
+	// Checks if a vehicle with the given plate number is currently leased.
 	private boolean isVehicleLeased(String plate) {
 		if (allLeasedVehicles == null || allLeasedVehicles.length == 0) {
 			return false;
@@ -131,9 +145,10 @@ public class LeaseManager {
 
 		return false;
 	}
-	
+
+	// Adds a vehicle to the array of leased vehicles.
 	private void addVehicleToLeasedArray(Vehicle v) {
-		
+
 		if(allLeasedVehicles == null|| allLeasedVehicles.length == 0) {
 			allLeasedVehicles = new Vehicle[1]; 
 			allLeasedVehicles[0] = v;
@@ -151,7 +166,8 @@ public class LeaseManager {
 		
 	}
 
-	public void unLeaseVehicle(int cliendId,String plate) {
+	// Removes a vehicle from the list of leased vehicles for a specific client based on the client ID and vehicle plate number.
+	public void unLeaseVehicle(int cliendId, String plate) {
 
 		if (!isVehicleLeased(plate)) {
 			System.out.println("Vehicle is not leased");
@@ -171,6 +187,7 @@ public class LeaseManager {
 
 	}
 
+	// Assigns a vehicle to a client for leasing based on the client ID and the vehicle's plate number.
 	public void leaseVehicle(int id, String plate) {
 		Client c = ClientInArray(id);
 		if (c == null) {
@@ -231,11 +248,12 @@ public class LeaseManager {
 
 	}
 
+	// Deletes a client from the list based on the client ID or displays an error if the client is not found.
 	public void deleteClient(int clientID) {
 
 		if (allClients == null || allClients.length == 0) {
 
-			System.err.println("No clients to remove");
+			System.out.println("No clients to remove");
 
 		} else if (allClients.length == 1) {
 
@@ -272,6 +290,7 @@ public class LeaseManager {
 
 	}
 
+	// Adds a new vehicle to the appropriate vehicle category based on its type.
 	public void addVehicle(Vehicle v) {
 		System.out.println(v.getType());
 		switch (v.getType()) {
@@ -289,12 +308,13 @@ public class LeaseManager {
 			allElectricTrucks = addCarToArray(allElectricTrucks, v);
 			break;
 		default:
-			System.err.println("Something wrong accured in addVehicle");
+			System.out.println("Something wrong accured in addVehicle");
 			break;
 		}
 
 	}
 
+	// Adds a vehicle to the specified array of vehicles and returns the updated array.
 	private static Vehicle[] addCarToArray(Vehicle[] arr, Vehicle v) {
 
 		Vehicle[] newArrCar = null;
@@ -312,6 +332,7 @@ public class LeaseManager {
 
 	}
 
+	// Deletes a vehicle from its respective category based on the given plate number.
 	public void deleteVehicle(String plateNb) {
 		String typeOfPlate = plateNb.substring(0, 2);
 		Vehicle[] arr = null;
@@ -329,12 +350,13 @@ public class LeaseManager {
 			allElectricTrucks = deleteCarFromArray(allElectricTrucks, plateNb);
 			break;
 		default:
-			System.err.println("Something wrong accured in deleteVehicle");
+			System.out.println("Something wrong accured in deleteVehicle");
 			break;
 		}
 
 	}
 
+	// Removes a vehicle with the specified plate number from the given array and returns the updated array.
 	private static Vehicle[] deleteCarFromArray(Vehicle[] allCars, String plateNb) {
 		if (allCars == null)
 			return allCars;
@@ -361,6 +383,7 @@ public class LeaseManager {
 		return allCars;
 	}
 
+	// Searches for and returns a vehicle with the given plate number from the specified array.
 	private static Vehicle getVehicleFromArray(Vehicle[] allCars, String plateNb) {
 		if (allCars == null) {
 			return null;
@@ -374,10 +397,11 @@ public class LeaseManager {
 		return null;
 	}
 
+	// Displays all vehicles grouped by category, or indicates if a category is empty
 	public void listAllVehiclesByCat() {
 
 		if (allCars == null || allCars.length == 0) {
-			System.err.println("No Gasoline Cars");
+			System.out.println("No Gasoline Cars");
 		} else {
 			System.out.println("Gasoline Cars:");
 			for (int i = 0; i < allCars.length; i++) {
@@ -401,7 +425,7 @@ public class LeaseManager {
 		if (allDieselTrucks == null || allDieselTrucks.length == 0) {
 			System.out.println("No Diesel Trucks");
 		} else {
-			System.err.println("Diesel Trucks:");
+			System.out.println("Diesel Trucks:");
 			for (int i = 0; i < allDieselTrucks.length; i++) {
 
 				System.out.println("#" + i + " " + allDieselTrucks[i]);
@@ -422,6 +446,7 @@ public class LeaseManager {
 		System.out.println();
 	}
 
+	// Updates the details of a vehicle based on its plate number and new data provided
 	public void editVehicle(String plateNb, String newV) {
 
 		String typeOfPlate = plateNb.substring(0, 2);
@@ -461,50 +486,22 @@ public class LeaseManager {
 			electricTruck.setMaxRange(Double.valueOf(carParts[4]));
 			break;
 		default:
-			System.err.println("Something wrong accured in deleteVehicle");
+			System.out.println("Something wrong accured in deleteVehicle");
 			break;
 		}
 
 	}
 
-	public Vehicle[] getArrayDiselTruck(){
+	// Returns the array of all diesel trucks.
+	public Vehicle[] getArrayDiselTruck() {
 		return allDieselTrucks;
 	}
 
-	public Vehicle[] getArrayElectricTruck(){
+	// Returns the array of all electric trucks.
+	public Vehicle[] getArrayElectricTruck() {
 		return allElectricTrucks;
 	}
 
-	public static DieselTruck getLargestTruck(Vehicle[] array) {
 
-		if(array == null || array.length == 0) {
-			return null;
-		}
-		int arraySize = array.length;
-		int positionBeiggestTruck = 0;
-
-		for (int i = 1; i < arraySize; i++) {
-			if (((DieselTruck) array[i]).getMaxCapacity() > ((DieselTruck) array[positionBeiggestTruck])
-					.getMaxCapacity()) {
-				positionBeiggestTruck = i;
-			}
-		}
-
-		return (DieselTruck) array[positionBeiggestTruck];
-	}
-
-	public static ElectricTruck[] copyVehicles(Vehicle[] v){
-
-		if(v == null || v.length == 0) {
-			return null;
-		}
-
-		ElectricTruck[] newArray = new ElectricTruck[v.length];
-
-		for(int i = 0; i < v.length; i++) {
-			newArray[i] = new ElectricTruck((ElectricTruck) v[i]);
-		}
-		return newArray;
-	}
 
 }
