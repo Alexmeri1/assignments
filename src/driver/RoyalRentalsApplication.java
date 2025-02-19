@@ -366,9 +366,10 @@ public class RoyalRentalsApplication {
             Vehicle vehicle = null;
             displayAddVehicles();
             choice = getUserInput();
-            displayWarning();
+
             switch (choice) {
                 case "1": {
+                    displayWarning();
                     System.out.println(
                             "Model *semi-colon* YearOfProduction *semi-colon* Make *semi-colon* MaxNumberOfPassanger");
                     choice = getUserInput();
@@ -378,6 +379,7 @@ public class RoyalRentalsApplication {
                     break;
                 }
                 case "2": {
+                    displayWarning();
                     System.out.println(
                             "Model *semi-colon* YearOfProduction *semi-colon* Make *semi-colon* MaxNumberOfPassanger *semi-colon* MaxRange (Km)");
                     choice = getUserInput();
@@ -388,6 +390,7 @@ public class RoyalRentalsApplication {
                     break;
                 }
                 case "3": {
+                    displayWarning();
                     System.out.println(
                             "Model *semi-colon* YearOfProduction *semi-colon* Make *semi-colon* MaxCapacity (Kg) *semi-colon* TankCapacity (L)");
                     choice = getUserInput();
@@ -398,6 +401,7 @@ public class RoyalRentalsApplication {
                     break;
                 }
                 case "4": {
+                    displayWarning();
                     System.out.println(
                             "Model *semi-colon* YearOfProduction *semi-colon* Make *semi-colon* MaxCapacity (Kg) *semi-colon* MaxRange (Km)");
                     choice = getUserInput();

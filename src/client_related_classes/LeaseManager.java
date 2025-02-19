@@ -235,7 +235,7 @@ public class LeaseManager {
 
 		if (allClients == null || allClients.length == 0) {
 
-			System.err.println("No clients to remove");
+			System.out.println("No clients to remove");
 
 		} else if (allClients.length == 1) {
 
@@ -289,7 +289,7 @@ public class LeaseManager {
 			allElectricTrucks = addCarToArray(allElectricTrucks, v);
 			break;
 		default:
-			System.err.println("Something wrong accured in addVehicle");
+			System.out.println("Something wrong accured in addVehicle");
 			break;
 		}
 
@@ -329,7 +329,7 @@ public class LeaseManager {
 			allElectricTrucks = deleteCarFromArray(allElectricTrucks, plateNb);
 			break;
 		default:
-			System.err.println("Something wrong accured in deleteVehicle");
+			System.out.println("Something wrong accured in deleteVehicle");
 			break;
 		}
 
@@ -377,7 +377,7 @@ public class LeaseManager {
 	public void listAllVehiclesByCat() {
 
 		if (allCars == null || allCars.length == 0) {
-			System.err.println("No Gasoline Cars");
+			System.out.println("No Gasoline Cars");
 		} else {
 			System.out.println("Gasoline Cars:");
 			for (int i = 0; i < allCars.length; i++) {
@@ -401,7 +401,7 @@ public class LeaseManager {
 		if (allDieselTrucks == null || allDieselTrucks.length == 0) {
 			System.out.println("No Diesel Trucks");
 		} else {
-			System.err.println("Diesel Trucks:");
+			System.out.println("Diesel Trucks:");
 			for (int i = 0; i < allDieselTrucks.length; i++) {
 
 				System.out.println("#" + i + " " + allDieselTrucks[i]);
@@ -461,7 +461,7 @@ public class LeaseManager {
 			electricTruck.setMaxRange(Double.valueOf(carParts[4]));
 			break;
 		default:
-			System.err.println("Something wrong accured in deleteVehicle");
+			System.out.println("Something wrong accured in deleteVehicle");
 			break;
 		}
 
