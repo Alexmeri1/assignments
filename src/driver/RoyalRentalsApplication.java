@@ -1,4 +1,9 @@
 package driver;
+// Assignment 1
+// Written by: Alexander Meriakri #40310155
+
+// This is the main application class for the RoyalRentals system.
+// It manages client interactions for vehicle rentals using predefined scenarios or manual testing.
 
 import java.util.Scanner;
 
@@ -11,44 +16,47 @@ import vehicules_related_classes.ElectricTruck;
 import vehicules_related_classes.Vehicle;
 
 public class RoyalRentalsApplication {
+
+    // Scanner object to handle user inputs.
     private Scanner sc = new Scanner(System.in);
+
+    // LeaseManager object that handles core client-vehicle leasing relationships.
     private LeaseManager manager = new LeaseManager();
 
     public static void main(String[] args) {
-
+        // Application entry point
         RoyalRentalsApplication application = new RoyalRentalsApplication();
         application.run();
-
     }
+
 
     private void run() {
 
         System.out.println("Hello and welcome to RoyalRentals");
 
-        displayIntialChoice();
+        displayIntialChoice(); // Displays the initial menu choices to the user.
 
         String c = getUserInput();
         switch (c) {
             case "1": {
-
-                processPredefinedScenario();
+                processPredefinedScenario(); // Runs a hardcoded set of operations.
                 break;
             }
             case "2": {
-                processManualTesting();
+                processManualTesting(); // Allows the user to interact manually with the system.
                 break;
-
             }
             default:
-                System.out.println("Wrong input");
+                System.out.println("Wrong input"); // Handles invalid input.
         }
 
         System.out.println("\nThank you,\nGood bye!");
-
     }
 
+    // Runs a predefined scenario for testing
     private void processPredefinedScenario() {
 
+        // Creating various types of vehicles for testing.
         Car c1 = new Car();
         Car c2 = new Car("BMW", 2024, "BMW motors", 5);
         Car c3 = new Car(c2);
@@ -90,19 +98,23 @@ public class RoyalRentalsApplication {
         System.out.println(ec2);
         System.out.println(ec3);
 
-        System.out.println(ec1.equals(c2)); //false
-        System.out.println(ec1.equals(ec2)); //false
-        System.out.println(ec2.equals(ec3)); //true
+        // Testing the equals method for vehicle comparison.
+        System.out.println(ec1.equals(c2)); // Should return false as types differ.
+        System.out.println(ec1.equals(ec2)); // Should return false as objects are different.
+        System.out.println(ec2.equals(ec3)); // Should return true as ec3 is a copy of ec2.
 
+        // Creating arrays to manage and organize the vehicles.
         Vehicle[] manyCars = {c1, c2, c3};
         Vehicle[] manyElectricCars = {ec1, ec2, ec3};
         Vehicle[] manyDieselTrucks = {dt1, dt2, dt3};
         Vehicle[] manyElectricTrucks = {et1, et2, et3};
         Vehicle[] manyVehicles = {c1, c2, c3, ec1, ec2, ec3, dt1, dt2, dt3, et1, et2, et3};
 
+        // Finding the largest diesel truck and printing it.
+        System.out.println(getLargestTruck(manyDieselTrucks));
 
-        System.out.println(manager.getLargestTruck(manyDieselTrucks));
-        Vehicle[] copyElec = manager.copyVehicles(manyElectricTrucks);
+        // Creating a copy of electric trucks and displaying them both.
+        Vehicle[] copyElec = copyVehicles(manyElectricTrucks);
         for (int i = 0; i < copyElec.length; i++) {
             System.out.println(copyElec[i] + "\n" + manyElectricTrucks[i]);
         }
@@ -115,13 +127,15 @@ public class RoyalRentalsApplication {
         manager.addVehicle(c1);
 
 
-        manager.leaseVehicle( Alex.getClientID(),ec2.getPlateNb());
-        manager.listAllLeasedVehicles();
-        manager.unLeaseVehicle(Alex.getClientID(),ec2.getPlateNb());
+        // Leasing operations to test adding, listing, and removing leased vehicles.
+        manager.leaseVehicle(Alex.getClientID(), ec2.getPlateNb()); // Leasing the vehicle ec2 to client Alex.
+        manager.listAllLeasedVehicles(); // Displaying all leased vehicles across clients.
+        manager.unLeaseVehicle(Alex.getClientID(), ec2.getPlateNb()); // Returning the leased vehicle from Alex.
 
 
     }
 
+    // Provides a menu-driven interface for manual testing of the application's features.
     private void processManualTesting() {
         boolean runs = true;
         String choice = null;
@@ -161,8 +175,9 @@ public class RoyalRentalsApplication {
 
     }
 
+    // Provides features, like finding the largest truck
+    // and creating a copy of the electric truck array.
     private void processOptionsAdditional() {
-
 
         boolean runs = true;
         String choice;
@@ -173,7 +188,7 @@ public class RoyalRentalsApplication {
             switch (choice) {
                 case "1": {
 
-                    Vehicle largestTruck = manager.getLargestTruck(manager.getArrayDiselTruck());
+                    Vehicle largestTruck = getLargestTruck(manager.getArrayDiselTruck());
                     if (largestTruck == null) {
                         System.out.println("No trucks");
                     } else {
@@ -182,7 +197,7 @@ public class RoyalRentalsApplication {
                     break;
                 }
                 case "2": {
-                    Vehicle[] elecCopy = manager.copyVehicles(manager.getArrayElectricTruck());
+                    Vehicle[] elecCopy = copyVehicles(manager.getArrayElectricTruck());
                     if (elecCopy == null) {
                         System.out.println("No electric trucks");
 
@@ -208,6 +223,8 @@ public class RoyalRentalsApplication {
 
     }
 
+    // Handles leasing operations such as leasing a vehicle, returning a leased vehicle,
+    // and viewing vehicles leased by a client or all clients.
     private void processOptionsLease() {
 
         boolean runs = true;
@@ -258,6 +275,7 @@ public class RoyalRentalsApplication {
 
     }
 
+    // Manages client-related functionality including adding, editing, and deleting clients.
     private void processOptionsClient() {
 
         boolean runs = true;
@@ -302,6 +320,7 @@ public class RoyalRentalsApplication {
 
     }
 
+    // Manages vehicle-related tasks such as adding, editing, deleting, and listing vehicles.
     private void processOptionsVehicles() {
 
         boolean runs = true;
@@ -511,5 +530,35 @@ public class RoyalRentalsApplication {
                 Your choice is ->: """);
     }
 
+    public static DieselTruck getLargestTruck(Vehicle[] array) {
 
+        if(array == null || array.length == 0) {
+            return null;
+        }
+        int arraySize = array.length;
+        int positionBeiggestTruck = 0;
+
+        for (int i = 1; i < arraySize; i++) {
+            if (((DieselTruck) array[i]).getMaxCapacity() > ((DieselTruck) array[positionBeiggestTruck])
+                    .getMaxCapacity()) {
+                positionBeiggestTruck = i;
+            }
+        }
+
+        return (DieselTruck) array[positionBeiggestTruck];
+    }
+
+    public static ElectricTruck[] copyVehicles(Vehicle[] v){
+
+        if(v == null || v.length == 0) {
+            return null;
+        }
+
+        ElectricTruck[] newArray = new ElectricTruck[v.length];
+
+        for(int i = 0; i < v.length; i++) {
+            newArray[i] = new ElectricTruck((ElectricTruck) v[i]);
+        }
+        return newArray;
+    }
 }

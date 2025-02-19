@@ -2,12 +2,16 @@ package client_related_classes;
 
 import vehicules_related_classes.Vehicle;
 
-import java.util.Optional;
+// Assignment 1
+// Written by: Alexander Meriakri #40310155
 
+// This class represents a client who can lease vehicles.
+// It contains details about the client's name, ID, and the vehicles they have leased.
 public class Client {
-	
+
 	protected String name;
 	protected int ID;
+	// Static variable to track the last used client ID.
 	private static int lastID = 0;
 
 	protected Vehicle[] allCarsLeased = null;
@@ -51,8 +55,9 @@ public class Client {
 		return this.name;
 	}
 
+	// Prints a list of all vehicles currently leased by the client.
 	public void listAllVehiclesLeasedByClient() {
-		
+
 		if(allCarsLeased == null || allCarsLeased.length == 0) {
 			System.out.printf("No cars leased by %s \n", this.name);
 		}else {
@@ -63,9 +68,10 @@ public class Client {
 		}
 		
 	}
-	
+
+	// Adds a vehicle to the client's list of leased vehicles.
 	public void addVehiclesToClient(Vehicle v) {
-		
+
 		Vehicle[] arrayAdded;
 
 		if (this.allCarsLeased == null) {
@@ -85,6 +91,8 @@ public class Client {
 	}
 
 
+	// Removes a vehicle from the client's list of leased vehicles.
+	// Displays an error if the vehicle doesn't exist in the list.
 	public void removeVehiclesFromClient(Vehicle v) {
 		if (this.allCarsLeased == null || this.allCarsLeased.length == 0) {
 			System.out.println("No cars to remove");
@@ -127,7 +135,8 @@ public class Client {
 		return this.ID;
 	}
 
-	
+
+	// Returns a string representation of the client, including leased vehicles.
 	public String toString() {
 		String toReturn = String.format("Name: %s  ID#%d has:\n", this.name, this.ID);
 

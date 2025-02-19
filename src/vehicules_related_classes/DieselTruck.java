@@ -1,5 +1,6 @@
 package vehicules_related_classes;
-
+// Assignment 1
+// Written by: Alexander Meriakri #40310155
 public class DieselTruck extends Truck{
 	private static int nbOfVehicles;
 	protected double tankCapacity;
@@ -46,6 +47,7 @@ public class DieselTruck extends Truck{
 		return this.nbOfVehicles;
 	}
 
+	// Returns the unique type identifier for DieselTruck, "DT".
 	@Override
 	public String getType() {
 		return "DT";

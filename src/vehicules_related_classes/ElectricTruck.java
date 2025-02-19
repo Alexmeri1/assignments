@@ -1,5 +1,6 @@
 package vehicules_related_classes;
-
+// Assignment 1
+// Written by: Alexander Meriakri #40310155
 public class ElectricTruck extends Truck{
 	protected double maxRange;
 	private static int nbOfVehicles;
@@ -28,6 +29,7 @@ public class ElectricTruck extends Truck{
 		this.maxRange = maxRange;
 	}
 
+	// Increment the count of ElectricTruck instances whenever one is created.
 	@Override
 	public void incrementNbVehicles() {
 		this.nbOfVehicles++;
@@ -46,7 +48,7 @@ public class ElectricTruck extends Truck{
 	
 	public String toString() {
 		String toReturn = super.toString() + String.format("Max range: %.2f km|",this.maxRange);
-		
+
 		return toReturn;
 	}
 	

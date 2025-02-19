@@ -1,8 +1,12 @@
 package vehicules_related_classes;
+// Assignment 1
+// Written by: Alexander Meriakri #40310155
 
 public class Car extends Vehicle {
 
+	// Maximum number of passengers this car can hold
 	protected int maxNbPassangers;
+	// Static counter to keep track of the number of Car objects created
 	private static int nbOfVehicles;
 
 	public Car() {
@@ -27,7 +31,7 @@ public class Car extends Vehicle {
 	public void setMaxNbPassangers(int newAmount) {
 		this.maxNbPassangers = newAmount;
 	}
-	
+
 
 	@Override
 	public String toString() {
@@ -53,23 +57,22 @@ public class Car extends Vehicle {
 
 	}
 
+	// Increments the counter tracking the total number of Car objects
 	@Override
 	public void incrementNbVehicles() {
 		nbOfVehicles++;
-
 	}
 
+	// Returns the total number of Car objects created
 	@Override
 	public int getNbVehicles() {
-
 		return this.nbOfVehicles;
 	}
 
+	// Returns the type of the vehicle as a string identifier
 	@Override
 	public String getType() {
-
 		return "GC";
 	}
-	
-	
+
 }
