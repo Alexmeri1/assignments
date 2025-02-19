@@ -16,7 +16,7 @@ public class LeaseManager {
 
 	protected Vehicle[] allElectricTrucks = null;
 
-	protected Client allClients[] = null;
+	protected Client[] allClients = null;
 
 	protected Vehicle[] allLeasedVehicles = null;
 
@@ -33,12 +33,35 @@ public class LeaseManager {
 				newList[i] = allClients[i];
 			}
 
-			newList[allClients.length - 1] = c;
+			newList[allClients.length] = c;
 			allClients = newList;
 
 		}
 
 	}
+
+	public void listAllLeasedVehicles() {
+		if(allLeasedVehicles == null || allLeasedVehicles.length == 0) {
+			System.out.println("No vehicles leased");
+		}
+		else {
+			System.out.println("Vehicles leased:");
+			for(int i = 0; i < allLeasedVehicles.length; i++) {
+				System.out.println("#" + i + " " + allLeasedVehicles[i]);
+			}
+		}
+		System.out.println();
+	}
+
+	public void listAllVehiclesForClient(int id) {
+		Client c = ClientInArray(id);
+		if(c == null) {
+			System.out.println("Client not found");
+		}
+		c.listAllVehiclesLeasedByClient();
+
+	}
+
 
 	public void listAllClients() {
 
@@ -47,8 +70,8 @@ public class LeaseManager {
 			return;
 		} else {
 
-			for (int i = 0; i < allClients.length; i++) {
-				System.out.printf("Client name: %s| ID: %s", allClients[i].getClientID(), allClients[i].getName());
+			for (Client client : allClients) {
+				System.out.printf("Client name: %s | ID: %d%n", client.getName(), client.getClientID());
 			}
 
 		}
@@ -127,7 +150,27 @@ public class LeaseManager {
 		
 		
 	}
-	
+
+	public void unLeaseVehicle(int cliendId,String plate) {
+
+		if (!isVehicleLeased(plate)) {
+			System.out.println("Vehicle is not leased");
+			return;
+		}
+
+		Client c = ClientInArray(cliendId);
+		if (c == null) {
+			System.out.println("Client not in array");
+			return;
+
+		}
+
+		Vehicle v = getVehicleFromArray(allLeasedVehicles, plate);
+		c.removeVehiclesFromClient(v);
+		allLeasedVehicles = deleteCarFromArray(allLeasedVehicles, plate);
+
+	}
+
 	public void leaseVehicle(int id, String plate) {
 		Client c = ClientInArray(id);
 		if (c == null) {
@@ -139,15 +182,13 @@ public class LeaseManager {
 			System.out.println("Vehicle is leased");
 			return;
 		}
-		
-		
-		
+
 		String type = plate.substring(0, 2);
 		switch (type) {
 
 		case "GC":
 			Vehicle car = getVehicleFromArray(allCars, plate);
-			if (car == null) {
+			if (car != null) {
 				addVehicleToLeasedArray(car);
 				c.addVehiclesToClient(car);
 			} else {
@@ -156,7 +197,7 @@ public class LeaseManager {
 			break;
 		case "EC":
 			Vehicle eCar = getVehicleFromArray(allElectricCars, plate);
-			if (eCar == null) {
+			if (eCar != null) {
 				addVehicleToLeasedArray(eCar);
 				c.addVehiclesToClient(eCar);
 			} else {
@@ -166,7 +207,7 @@ public class LeaseManager {
 		case "DT":
 
 			Vehicle truck = getVehicleFromArray(allDieselTrucks, plate);
-			if (truck == null) {
+			if (truck != null) {
 				addVehicleToLeasedArray(truck);
 				c.addVehiclesToClient(truck);
 			} else {
@@ -175,7 +216,7 @@ public class LeaseManager {
 			break;
 		case "ET":
 			Vehicle eTruck = getVehicleFromArray(allElectricTrucks, plate);
-			if (eTruck == null) {
+			if (eTruck != null) {
 				addVehicleToLeasedArray(eTruck);
 				c.addVehiclesToClient(eTruck);
 			} else {
@@ -234,6 +275,7 @@ public class LeaseManager {
 	public void addVehicle(Vehicle v) {
 		System.out.println(v.getType());
 		switch (v.getType()) {
+
 		case "GC":
 			allCars = addCarToArray(allCars, v);
 			break;
@@ -256,6 +298,7 @@ public class LeaseManager {
 	private static Vehicle[] addCarToArray(Vehicle[] arr, Vehicle v) {
 
 		Vehicle[] newArrCar = null;
+
 		if (arr == null) {
 			newArrCar = new Vehicle[1];
 		} else {
@@ -266,77 +309,7 @@ public class LeaseManager {
 		}
 		newArrCar[newArrCar.length - 1] = v;
 		return newArrCar;
-//		allGasolineCars = newArrCar;
-//		
-//		
-//
-//		switch (v.getType()) {
-//
-//		case "GC":
-//			Car[] newArrCar = null;
-//			if (arr == null) {
-//				newArrCar = new Car[1];
-//				newArrCar[0] = (Car) v;
-//			} else {
-//				newArrCar = new Car[arr.length + 1];
-//				for (int i = 0; i < arr.length; i++) {
-//					newArrCar[i] = (Car) arr[i];
-//				}
-//				newArrCar[newArrCar.length - 1] = (Car) v;
-//
-//			}
-//			allGasolineCars = newArrCar;
-//			break;
-//		case "EC":
-//			ElectricCar[] newArrECar = null;
-//			if (arr == null) {
-//				newArrECar = new ElectricCar[1];
-//				newArrECar[0] = (ElectricCar) v;
-//			} else {
-//				newArrECar = new ElectricCar[arr.length + 1];
-//				for (int i = 0; i < arr.length; i++) {
-//					newArrECar[i] = (ElectricCar) arr[i];
-//				}
-//				newArrECar[newArrECar.length - 1] = (ElectricCar) v;
-//
-//			}
-//			allElectricCars = newArrECar;
-//			break;
-//		case "DT":
-//			DieselTruck[] newArrDieselT = null;
-//			if (arr == null) {
-//				newArrDieselT = new DieselTruck[1];
-//				newArrDieselT[0] = (DieselTruck) v;
-//			} else {
-//				newArrDieselT = new DieselTruck[arr.length + 1];
-//				for (int i = 0; i < arr.length; i++) {
-//					newArrDieselT[i] = (DieselTruck) arr[i];
-//				}
-//				newArrDieselT[newArrDieselT.length - 1] = (DieselTruck) v;
-//
-//			}
-//			allDieselTrucks = newArrDieselT;
-//			break;
-//		case "ET":
-//
-//			ElectricTruck[] newArrET = null;
-//			if (arr == null) {
-//				newArrET = new ElectricTruck[1];
-//				newArrET[0] = (ElectricTruck) v;
-//			} else {
-//				newArrET = new ElectricTruck[arr.length + 1];
-//				for (int i = 0; i < arr.length; i++) {
-//					newArrET[i] = (ElectricTruck) arr[i];
-//				}
-//				newArrET[newArrET.length - 1] = (ElectricTruck) v;
-//
-//			}
-//			allElectricTrucks = newArrET;
-//			break;
-//		default:
-//			System.err.println("Something wrong accured in addCarToArray");
-//			break;
-//		}
+
 	}
 
 	public void deleteVehicle(String plateNb) {
@@ -359,82 +332,6 @@ public class LeaseManager {
 			System.err.println("Something wrong accured in deleteVehicle");
 			break;
 		}
-
-//		
-//		if (isVehiculeInArray(plateNb)) {
-//			String typeOfPlate = plateNb.substring(0, 2);
-//			switch (typeOfPlate) {
-//
-//			case "GC":
-//				if (allGasolineCars.length == 1) {
-//					allGasolineCars = null;
-//				} else {
-//
-//					Car[] newCarArr = new Car[allGasolineCars.length - 1];
-//					for (int i = 0, j = 0; i < allGasolineCars.length; i++) {
-//						if (!allGasolineCars[i].getPlateNb().equals(typeOfPlate)) {
-//							newCarArr[j] = (Car) allGasolineCars[i];
-//							j++;
-//						}
-//
-//					}
-//					allGasolineCars = newCarArr;
-//				}
-//
-//				break;
-//			case "EC":
-//				if (allElectricCars.length == 1) {
-//					allElectricCars = null;
-//				} else {
-//					ElectricCar[] newECarArr = new ElectricCar[allElectricCars.length - 1];
-//					for (int i = 0, j = 0; i < allElectricCars.length; i++) {
-//						if (!allElectricCars[i].getPlateNb().equals(typeOfPlate)) {
-//							newECarArr[j] = (ElectricCar) allElectricCars[i];
-//							j++;
-//						}
-//
-//					}
-//					allElectricCars = newECarArr;
-//				}
-//				break;
-//			case "DT":
-//				if (allDieselTrucks.length == 1) {
-//					allDieselTrucks = null;
-//				} else {
-//					DieselTruck[] newDieselTArr = new DieselTruck[allDieselTrucks.length - 1];
-//					for (int i = 0, j = 0; i < allDieselTrucks.length; i++) {
-//						if (!allDieselTrucks[i].getPlateNb().equals(typeOfPlate)) {
-//							newDieselTArr[j] = (DieselTruck) allDieselTrucks[i];
-//							j++;
-//						}
-//
-//					}
-//					allDieselTrucks = newDieselTArr;
-//				}
-//				break;
-//			case "ET":
-//				if (allElectricTrucks.length == 1) {
-//					allElectricTrucks = null;
-//				} else {
-//					ElectricTruck[] newETArr = new ElectricTruck[allElectricTrucks.length - 1];
-//					for (int i = 0, j = 0; i < allElectricTrucks.length; i++) {
-//						if (!allElectricTrucks[i].getPlateNb().equals(typeOfPlate)) {
-//							newETArr[j] = (ElectricTruck) allElectricTrucks[i];
-//							j++;
-//						}
-//
-//					}
-//					allElectricTrucks = newETArr;
-//				}
-//				break;
-//			default:
-//				System.err.println("Something wrong happened in deleteVehicles");
-//				break;
-//			}
-//
-//		} else {
-//			System.err.println("Vehicle not in the array");
-//		}
 
 	}
 
@@ -570,9 +467,22 @@ public class LeaseManager {
 
 	}
 
+	public Vehicle[] getArrayDiselTruck(){
+		return allDieselTrucks;
+	}
+
+	public Vehicle[] getArrayElectricTruck(){
+		return allElectricTrucks;
+	}
+
 	public static DieselTruck getLargestTruck(Vehicle[] array) {
+
+		if(array == null || array.length == 0) {
+			return null;
+		}
 		int arraySize = array.length;
 		int positionBeiggestTruck = 0;
+
 		for (int i = 1; i < arraySize; i++) {
 			if (((DieselTruck) array[i]).getMaxCapacity() > ((DieselTruck) array[positionBeiggestTruck])
 					.getMaxCapacity()) {
@@ -581,6 +491,20 @@ public class LeaseManager {
 		}
 
 		return (DieselTruck) array[positionBeiggestTruck];
+	}
+
+	public static ElectricTruck[] copyVehicles(Vehicle[] v){
+
+		if(v == null || v.length == 0) {
+			return null;
+		}
+
+		ElectricTruck[] newArray = new ElectricTruck[v.length];
+
+		for(int i = 0; i < v.length; i++) {
+			newArray[i] = new ElectricTruck((ElectricTruck) v[i]);
+		}
+		return newArray;
 	}
 
 }

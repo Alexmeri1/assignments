@@ -54,7 +54,7 @@ public class ElectricCar extends Car{
 			return true;
 		}
 		
-		if (this == null || this.getClass() != other.getClass()) {
+		if (other == null || this.getClass() != other.getClass()) {
 			return false;
 		}
 		

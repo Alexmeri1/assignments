@@ -7,7 +7,7 @@ public abstract class Vehicle {
 	protected String plateNumber;
 
 	public Vehicle() {
-		this("Audi", 0, "No make");
+		this("No model", 0, "No make");
 	}
 
 	public Vehicle(String model, int yearOfProduction, String make) {
@@ -101,8 +101,11 @@ public abstract class Vehicle {
 
 	public String toString() {
 
-		String toReturn = String.format("Model: %s|Year of production: %d|Make: %s|Plate number: %s|", this.model,
-				this.yearOfProduction, this.make, this.plateNumber);
+		String toReturn = String.format(
+				"Model: %s | Year of production: %d | Make: %s | Plate number: %s |",
+				this.model, this.yearOfProduction, this.make, this.plateNumber
+		);
+
 
 		return toReturn;
 	}

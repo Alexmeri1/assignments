@@ -41,7 +41,7 @@ public class Car extends Vehicle {
 		if (this == otherC) {
 			return true;
 		}
-		if (this == null || this.getClass() != otherC.getClass()) {
+		if (otherC == null || this.getClass() != otherC.getClass()) {
 			return false;
 		}
 

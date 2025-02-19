@@ -51,4 +51,20 @@ public class DieselTruck extends Truck{
 		return "DT";
 	}
 
+
+	public boolean equals(Object other) {
+		if(this == other) {
+			return true;
+		}
+
+		if (other == null || this.getClass() != other.getClass()) {
+			return false;
+		}
+
+		DieselTruck dt = (DieselTruck) other;
+		return (this.make.equals(dt.make)
+				&& this.model.equals(dt.model) && this.yearOfProduction == dt.yearOfProduction
+				&& this.maxCapacity == dt.maxCapacity
+				&& (Double.compare(this.tankCapacity,dt.tankCapacity) == 0 ) );
+	}
 }
