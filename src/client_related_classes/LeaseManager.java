@@ -292,7 +292,6 @@ public class LeaseManager {
 
 	// Adds a new vehicle to the appropriate vehicle category based on its type.
 	public void addVehicle(Vehicle v) {
-		System.out.println(v.getType());
 		switch (v.getType()) {
 
 		case "GC":

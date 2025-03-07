@@ -111,10 +111,13 @@ public class RoyalRentalsApplication {
         Vehicle[] manyVehicles = {c1, c2, c3, ec1, ec2, ec3, dt1, dt2, dt3, et1, et2, et3};
 
         // Finding the largest diesel truck and printing it.
+        System.out.println("Largest truck is: ");
         System.out.println(getLargestTruck(manyDieselTrucks));
-
+        System.out.println();
+        
         // Creating a copy of electric trucks and displaying them both.
         Vehicle[] copyElec = copyVehicles(manyElectricTrucks);
+        System.out.println("Copy vs \nOriginal");
         for (int i = 0; i < copyElec.length; i++) {
             System.out.println(copyElec[i] + "\n" + manyElectricTrucks[i]);
         }
@@ -132,7 +135,7 @@ public class RoyalRentalsApplication {
         manager.listAllLeasedVehicles(); // Displaying all leased vehicles across clients.
         manager.unLeaseVehicle(Alex.getClientID(), ec2.getPlateNb()); // Returning the leased vehicle from Alex.
 
-
+        	
     }
 
     // Provides a menu-driven interface for manual testing of the application's features.
